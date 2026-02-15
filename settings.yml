@@ -7,3 +7,16 @@ hide_all_breadcrumb_nav:
 hide_on_topic_scroll:
   default: false
   refresh: true
+
+links:
+  type: objects
+  default: []
+  schema:
+    name: link
+    properties:
+      link:
+        type: string
+        required: true
+      label:
+        type: string
+        required: true
