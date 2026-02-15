@@ -12,4 +12,4 @@ en:
               description: "The path to the page, like '/about'"
             label:
               label: "Link text"
-              description: "The text of the link, like About"
+              description: "The text of the link, like 'About'"
