@@ -80,7 +80,7 @@ export default class CustomCategoriesNavbar extends Component {
         <HorizontalOverflowNav>
           {{#each this.otherRoutes as |route|}}
             <li>
-              <a href={{route.link}} class={{if (eq this.activePage (concat "/" route.link)) "active" ""}}>{{route.label}}</a>
+              <a href={{route.link}} class={{if (eq this.activePage route.link) "active" ""}}>{{route.label}}</a>
             </li>
           {{/each}}
 
