@@ -10,11 +10,19 @@ export default class CustomCategoriesNavbar extends Component {
   @service router;
 
   @tracked activeSlug = "";
+  @tracked activePage = "";
+  otherRoutes = [
+    { link: "/about", label: "About" },
+    { link: "/latest", label: "Latest topics" },
+    { link: "/badges", label: "Badges" },
+  ];
 
   constructor() {
     super(...arguments);
     this.setActiveSlug();
+    this.setActivePage();
     this.router.on("routeDidChange", this, this.setActiveSlug);
+    this.router.on("routeDidChange", this, this.setActivePage);
   }
 
   get shouldRender() {
@@ -25,6 +33,22 @@ export default class CustomCategoriesNavbar extends Component {
       : this.site.mobileView && isMinimized;
 
     return !alwaysHideDocked && !isChat;
+  }
+
+  setActivePage() {
+    const currentRoute = this.router.currentRoute;
+    if (currentRoute && !currentRoute.attributes?.category) {
+      console.log(currentRoute);
+      this.activePage = currentRoute.name;
+
+      // scroll active link into view
+      document
+        .querySelector(`a[id="${this.activePage}"]`)
+        ?.scrollIntoView({
+          block: "nearest",
+          inline: "center",
+        });
+    }
   }
 
   setActiveSlug() {
@@ -53,9 +77,12 @@ export default class CustomCategoriesNavbar extends Component {
     {{#if this.shouldRender}}
       <div class="wrap custom-categories-navbar">
         <HorizontalOverflowNav>
-          <li>
-            <a href="/about">About</a>
-          </li>
+          {{#each this.otherRoutes as |route|}}
+            <li>
+              <a href={{route.link}} id={{route.label}} class=(if (eq this.activeSlug sc.slug) "active" "")>{{route.label}}</a>
+            </li>
+          {{/each}}
+
           {{#each this.site.categories as |sc|}}
             {{#unless sc.parentCategory}}
               <li>
@@ -66,9 +93,6 @@ export default class CustomCategoriesNavbar extends Component {
               </li>
             {{/unless}}
           {{/each}}
-          <li>
-            <a href="/my/summary">My Summary</a>
-          </li>
         </HorizontalOverflowNav>
       </div>
     {{/if}}
