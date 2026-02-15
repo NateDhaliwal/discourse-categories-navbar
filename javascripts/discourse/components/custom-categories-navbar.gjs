@@ -53,6 +53,9 @@ export default class CustomCategoriesNavbar extends Component {
     {{#if this.shouldRender}}
       <div class="wrap custom-categories-navbar">
         <HorizontalOverflowNav>
+          <li>
+            <a class="/about">About</a>
+          </li>
           {{#each this.site.categories as |sc|}}
             {{#unless sc.parentCategory}}
               <li>
@@ -63,6 +66,9 @@ export default class CustomCategoriesNavbar extends Component {
               </li>
             {{/unless}}
           {{/each}}
+          <li>
+            <a class="/my/summary">My Summary</a>
+          </li>
         </HorizontalOverflowNav>
       </div>
     {{/if}}
