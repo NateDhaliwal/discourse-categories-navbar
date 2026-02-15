@@ -12,11 +12,6 @@ export default class CustomCategoriesNavbar extends Component {
 
   @tracked activeSlug = "";
   @tracked activePage = "";
-  otherRoutes = [
-    { link: "/about", label: "About" },
-    { link: "/latest", label: "Latest topics" },
-    { link: "/badges", label: "Badges" },
-  ];
 
   constructor() {
     super(...arguments);
@@ -80,7 +75,7 @@ export default class CustomCategoriesNavbar extends Component {
     {{#if this.shouldRender}}
       <div class="wrap custom-categories-navbar">
         <HorizontalOverflowNav>
-          {{#each this.otherRoutes as |route|}}
+          {{#each settings.links as |route|}}
             <li>
               <a href={{route.link}} class={{if (eq this.activePage route.link) "active" ""}}>{{route.label}}</a>
             </li>
