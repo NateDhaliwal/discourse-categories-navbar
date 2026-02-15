@@ -24,6 +24,9 @@ export default class CustomCategoriesNavbar extends Component {
     this.setActivePage();
     this.router.on("routeDidChange", this, this.setActiveSlug);
     this.router.on("routeDidChange", this, this.setActivePage);
+
+    // eslint-disable-next-line no-console
+    console.log(settings.links);
   }
 
   get shouldRender() {
