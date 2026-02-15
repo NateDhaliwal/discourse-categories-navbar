@@ -1,6 +1,7 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { service } from "@ember/service";
+import { concat } from "@ember/string";
 import { eq } from "truth-helpers";
 import HorizontalOverflowNav from "discourse/components/horizontal-overflow-nav";
 import categoryLink from "discourse/helpers/category-link";
@@ -38,12 +39,12 @@ export default class CustomCategoriesNavbar extends Component {
   setActivePage() {
     const currentRoute = this.router.currentRoute;
     if (currentRoute && !currentRoute.attributes?.category) {
-      console.log(currentRoute);
-      this.activePage = currentRoute.name;
+      console.log(window.location.href);
+      this.activePage = window.location.href;
 
       // scroll active link into view
       document
-        .querySelector(`a[id="${this.activePage}"]`)
+        .querySelector(`a[href="${this.activePage}"]`)
         ?.scrollIntoView({
           block: "nearest",
           inline: "center",
@@ -79,7 +80,7 @@ export default class CustomCategoriesNavbar extends Component {
         <HorizontalOverflowNav>
           {{#each this.otherRoutes as |route|}}
             <li>
-              <a href={{route.link}} id={{route.label}} class={{if (eq this.activePage route.label) "active" ""}}>{{route.label}}</a>
+              <a href={{route.link}} class={{if (eq this.activePage (concat "/" route.link)) "active" ""}}>{{route.label}}</a>
             </li>
           {{/each}}
 
