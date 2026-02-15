@@ -3,3 +3,13 @@ en:
     description: "Show a navbar of your Discourse categories"
     settings:
       hide_on_topic_scroll: "When enabled, the nav will be hidden on desktop when the topic title is docked to the header"
+      links:
+        description: "Other links in the navbar"
+        schema:
+          properties:
+            link:
+              label: "Link path"
+              description: "The path to the page, like '/about'"
+            label:
+              label: "Link text"
+              description: "The text of the link, like About"
