@@ -39,7 +39,6 @@ export default class CustomCategoriesNavbar extends Component {
   setActivePage() {
     const currentRoute = this.router.currentRoute;
     if (currentRoute && !currentRoute.attributes?.category) {
-      console.log(this.router.currentURL);
       this.activePage = this.router.currentURL;
 
       // scroll active link into view
